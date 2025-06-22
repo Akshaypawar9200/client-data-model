@@ -2,13 +2,13 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Employees", {
+    await queryInterface.createTable("agents", {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
       },
-      employee_name: {
+      agent_name: {
         type: Sequelize.STRING,
       },
       user_name: {
@@ -44,6 +44,40 @@ module.exports = {
       document_type: {
         type: Sequelize.STRING,
       },
+      assign_insurance_plan: {
+        type: Sequelize.STRING,
+      },
+      employee_id: {
+        type: Sequelize.UUID,
+        allowNull: true,
+        references: {
+          model: "employees",
+          key: "id",
+        },
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      },
+
+      plan_id: {
+        type: Sequelize.UUID,
+        allowNull: true,
+        references: {
+          model: "plans",
+          key: "id",
+        },
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      },
+      customer_id: {
+        type: Sequelize.UUID,
+        allowNull: true,
+        references: {
+          model: "customers",
+          key: "id",
+        },
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -55,6 +89,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Employees");
+    await queryInterface.dropTable("agents");
   },
 };

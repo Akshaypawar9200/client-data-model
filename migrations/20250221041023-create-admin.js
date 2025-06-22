@@ -2,13 +2,13 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Agents", {
+    await queryInterface.createTable("admins", {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
       },
-      agent_name: {
+      admin_name: {
         type: Sequelize.STRING,
       },
       user_name: {
@@ -35,18 +35,7 @@ module.exports = {
       mobile: {
         type: Sequelize.STRING,
       },
-      nominee: {
-        type: Sequelize.STRING,
-      },
-      document: {
-        type: Sequelize.STRING,
-      },
-      document_type: {
-        type: Sequelize.STRING,
-      },
-      assign_insurance_plan: {
-        type: Sequelize.STRING,
-      },
+
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -58,6 +47,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Agents");
+    await queryInterface.dropTable("admins");
   },
 };

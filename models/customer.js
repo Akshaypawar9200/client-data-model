@@ -9,6 +9,27 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+
+      Customer.belongsTo(models.Employee, {
+        foreignKey: "employeeId",
+        as: "employee",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
+
+      Customer.belongsTo(models.Agent, {
+        foreignKey: "agentId",
+        as: "agent",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
+
+      Customer.belongsTo(models.Plan, {
+        foreignKey: "planId",
+        as: "plan",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
     }
   }
   Customer.init(
@@ -60,6 +81,19 @@ module.exports = (sequelize, DataTypes) => {
       documentType: {
         allowNull: false,
         Type: DataTypes.STRING,
+      },
+
+      employeeId: {
+        allowNull: true,
+        Type: DataTypes.UUID,
+      },
+      agentId: {
+        allowNull: true,
+        Type: DataTypes.UUID,
+      },
+      planId: {
+        allowNull: true,
+        Type: DataTypes.UUID,
       },
     },
     {

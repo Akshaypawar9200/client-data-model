@@ -9,6 +9,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+
+      Admin.hasMany(models.Employee, {
+        foreignKey: "adminId",
+        as: "employees",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
+
+      Admin.hasMany(models.Plan, {
+        foreignKey: "adminId",
+        as: "plans",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
     }
   }
   Admin.init(
@@ -52,6 +66,9 @@ module.exports = (sequelize, DataTypes) => {
       nominee: {
         Type: DataTypes.STRING,
         allowNull: false,
+      },
+      adminId: {
+        Type: DataTypes.UUID,
       },
     },
     {

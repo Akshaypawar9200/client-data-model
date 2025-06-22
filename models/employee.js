@@ -8,6 +8,24 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      Employee.hasMany(models.Agent, {
+        foreignKey: "employeeId",
+        as: "agent",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
+      Employee.hasMany(models.Customer, {
+        foreignKey: "employeeId",
+        as: "customer",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
+      Employee.hasMany(models.Plan, {
+        foreignKey: "employeeId",
+        as: "plan",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
       // define association here
     }
   }

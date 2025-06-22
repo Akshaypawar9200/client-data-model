@@ -9,6 +9,26 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+
+      Agent.belongsTo(models.Employee, {
+        foreignKey: "employeeId",
+        as: "employee",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
+
+      Agent.belongsTo(models.Plan, {
+        foreignKey: "planId",
+        as: "plan",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
+      Agent.hasMany(models.Customer, {
+        foreignKey: "customerId",
+        as: "customer",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
     }
   }
   Agent.init(
@@ -64,6 +84,18 @@ module.exports = (sequelize, DataTypes) => {
       assignInsurancePlan: {
         Type: DataTypes.STRING,
         allowNull: false,
+      },
+      employeeId: {
+        Type: DataTypes.UUID,
+        allowNull: true,
+      },
+      planId: {
+        Type: DataTypes.UUID,
+        allowNull: true,
+      },
+      customerId: {
+        Type: DataTypes.UUID,
+        allowNull: true,
       },
     },
     {

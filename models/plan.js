@@ -9,6 +9,19 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Plan.belongsTo(models.Admin, {
+        foreignKey: "adminId",
+        as: "admin",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
+
+      Plan.belongsTo(models.Employee, {
+        foreignKey: "employeeId",
+        as: "employee",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
     }
   }
   Plan.init(
@@ -28,6 +41,22 @@ module.exports = (sequelize, DataTypes) => {
       planDetails: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      adminId: {
+        Type: DataTypes.UUID,
+      },
+      employeeId: {
+        Type: DataTypes.UUID,
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
       },
     },
     {
