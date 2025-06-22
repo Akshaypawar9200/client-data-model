@@ -9,10 +9,38 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Plan.belongsTo(models.User, {
+        foreignKey: "assign_employee_id",
+        as: "user",
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
+      });
+      Plan.belongsTo(models.User, {
+        foreignKey: "assign_agent_id",
+        as: "user",
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
+      });
+      Plan.belongsTo(models.User, {
+        foreignKey: "created_by",
+        as: "user",
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
+      });
+      Plan.belongsTo(models.User, {
+        foreignKey: "assign_customer_id",
+        as: "user",
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
+      });
     }
   }
   Plan.init(
     {
+      id: {
+        type: DataTypes.UUID,
+        allowNull: false,
+      },
       planName: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -26,6 +54,40 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       planDetails: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      customerId: {
+        type: DataTypes.UUID,
+        allowNull: true,
+      },
+      assignEmployeeId: {
+        type: DataTypes.UUID,
+        allowNull: true,
+      },
+      assignAgentId: {
+        type: DataTypes.UUID,
+        allowNull: true,
+      },
+      assignCustomerId: {
+        type: DataTypes.UUID,
+        allowNull: true,
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
+      },
+      createdBy: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      updatedBy: {
         type: DataTypes.STRING,
         allowNull: false,
       },

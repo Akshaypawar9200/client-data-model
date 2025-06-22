@@ -2,38 +2,43 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("CustomerInsuranceDatas", {
+    await queryInterface.createTable("feedbacks", {
       id: {
         allowNull: false,
         // autoIncrement: true,
         primaryKey: true,
         type: Sequelize.UUID,
       },
-      plan_name: {
+      description: {
         type: Sequelize.STRING,
       },
-      purchase_date: {
+      created_by: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: "users",
+          key: "id",
+        },
+      },
+      update_by: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: "users",
+          key: "id",
+        },
+      },
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      payment_mode: {
-        type: Sequelize.STRING,
-      },
-      plan_expiry_date: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      created_At: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      updated_At: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("CustomerInsuranceDatas");
+    await queryInterface.dropTable("feedbacks");
   },
 };

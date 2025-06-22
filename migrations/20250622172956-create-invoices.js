@@ -2,50 +2,42 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Agents", {
+    await queryInterface.createTable("invoices", {
       id: {
         allowNull: false,
+        // autoIncrement: true,
         primaryKey: true,
         type: Sequelize.UUID,
       },
-      agent_name: {
+      first_name: {
         type: Sequelize.STRING,
       },
-      user_name: {
-        type: Sequelize.STRING,
-      },
-      address: {
-        type: Sequelize.STRING,
-      },
-      password: {
+      last_name: {
         type: Sequelize.STRING,
       },
       email: {
         type: Sequelize.STRING,
       },
-      state: {
-        type: Sequelize.STRING,
+      customer_id: {
+        type: Sequelize.UUID,
+        allowNull: true,
+        references: {
+          model: "users",
+          key: "id",
+        },
       },
-      city: {
+      payment_status: {
         type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: "pending",
       },
-      pincode: {
+      payment_mode: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
-      mobile: {
-        type: Sequelize.STRING,
-      },
-      nominee: {
-        type: Sequelize.STRING,
-      },
-      document: {
-        type: Sequelize.STRING,
-      },
-      document_type: {
-        type: Sequelize.STRING,
-      },
-      assign_insurance_plan: {
-        type: Sequelize.STRING,
+      amount: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       created_at: {
         allowNull: false,
@@ -58,6 +50,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Agents");
+    await queryInterface.dropTable("invoices");
   },
 };

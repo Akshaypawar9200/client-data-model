@@ -20,6 +20,40 @@ module.exports = {
       plan_details: {
         type: Sequelize.STRING,
       },
+
+      created_by: {
+        allowNull: false,
+        type: Sequelize.UUID,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.UUID,
+      },
+
+      assign_customer_id: {
+        type: Sequelize.UUID,
+        allowNull: true,
+        references: {
+          model: "users",
+          key: "id",
+        },
+      },
+      assigned_employee_id: {
+        allowNull: true,
+        type: Sequelize.UUID,
+        references: {
+          model: "users",
+          key: "id",
+        },
+      },
+      assigned_agent_id: {
+        allowNull: true,
+        type: Sequelize.UUID,
+        references: {
+          model: "users",
+          key: "id",
+        },
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
