@@ -10,48 +10,55 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.hasMany(models.Plan, {
         foreignKey: "assign_employee_id",
-        as: "plans",
+        as: "employeePlans",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
+
       User.hasMany(models.Plan, {
         foreignKey: "assign_agent_id",
-        as: "plans",
+        as: "agentPlans",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
+
       User.hasMany(models.Plan, {
         foreignKey: "created_by",
-        as: "plans",
+        as: "createdPlans",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
+
       User.hasMany(models.Plan, {
         foreignKey: "assign_customer_id",
-        as: "plans",
+        as: "customerPlans",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
 
       User.hasMany(models.Feedback, {
-        foreignKey: "createdBy",
+        foreignKey: "created_by",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
         as: "feedbacks",
       });
 
       User.hasMany(models.Invoices, {
-        foreignKey: "customerId",
+        foreignKey: "customer_Id",
         as: "invoices",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
-
-      // define association here
     }
   }
   User.init(
     {
+      id: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        primaryKey: true,
+        unique: true,
+      },
       firstName: { type: DataTypes.STRING, allowNull: false },
       lastName: { type: DataTypes.STRING, allowNull: false },
       email: { type: DataTypes.STRING, allowNull: false },
@@ -73,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "client",
+      modelName: "User",
       underscored: true,
     }
   );
