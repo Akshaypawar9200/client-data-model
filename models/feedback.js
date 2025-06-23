@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Feedback.belongsTo(models.User, {
-        foreignKey: "createdBy",
+        foreignKey: "created_by",
         as: "user",
         onUpdate: "CASCADE",
         onDelete: "SET NULL",

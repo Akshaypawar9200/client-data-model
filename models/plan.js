@@ -11,25 +11,25 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Plan.belongsTo(models.User, {
         foreignKey: "assign_employee_id",
-        as: "user",
+        as: "employeePlan",
         onUpdate: "CASCADE",
         onDelete: "SET NULL",
       });
       Plan.belongsTo(models.User, {
         foreignKey: "assign_agent_id",
-        as: "user",
+        as: "agentPlan",
         onUpdate: "CASCADE",
         onDelete: "SET NULL",
       });
       Plan.belongsTo(models.User, {
         foreignKey: "created_by",
-        as: "user",
+        as: "userPlan",
         onUpdate: "CASCADE",
         onDelete: "SET NULL",
       });
       Plan.belongsTo(models.User, {
         foreignKey: "assign_customer_id",
-        as: "user",
+        as: "customerPlan",
         onUpdate: "CASCADE",
         onDelete: "SET NULL",
       });
@@ -40,6 +40,8 @@ module.exports = (sequelize, DataTypes) => {
       id: {
         type: DataTypes.UUID,
         allowNull: false,
+        primaryKey: true,
+        unique: true,
       },
       planName: {
         type: DataTypes.STRING,
