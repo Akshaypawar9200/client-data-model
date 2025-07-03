@@ -59,10 +59,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      customerId: {
-        type: DataTypes.UUID,
-        allowNull: true,
-      },
+
       assignEmployeeId: {
         type: DataTypes.UUID,
         allowNull: true,
