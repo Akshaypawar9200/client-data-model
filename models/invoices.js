@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Invoices.belongsTo(models.User, {
-        foreignKey: "customerId",
+        foreignKey: "customer_id",
         as: "user",
         onUpdate: "CASCADE",
         onDelete: "SET NULL",
