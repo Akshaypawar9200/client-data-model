@@ -1,5 +1,4 @@
-const env = process.env.NODE_ENV || "local";
-if (env === "local") require("dotenv").config({ path: "./.env" });
+require("dotenv").config({ path: "./.env" });
 
 const dbConfig = {
   local: {
@@ -7,7 +6,7 @@ const dbConfig = {
     password: process.env.USER_DB_PASSWORD,
     database: process.env.USER_DB_NAME,
     host: process.env.USER_DB_INSTANCE_URL,
-    port: process.env.USER_DB_PORT,
+    port: Number(process.env.USER_DB_PORT),
     dialect: "postgres",
   },
   development: {
@@ -15,7 +14,7 @@ const dbConfig = {
     password: process.env.USER_DB_PASSWORD,
     database: process.env.USER_DB_NAME,
     host: process.env.USER_DB_INSTANCE_URL,
-    port: process.env.USER_DB_PORT,
+    port: Number(process.env.USER_DB_PORT),
     dialect: "postgres",
   },
   beta: {
@@ -23,7 +22,7 @@ const dbConfig = {
     password: process.env.USER_DB_PASSWORD,
     database: process.env.USER_DB_NAME,
     host: process.env.USER_DB_INSTANCE_URL,
-    port: process.env.USER_DB_PORT,
+    port: Number(process.env.USER_DB_PORT),
     dialect: "postgres",
   },
   production: {
@@ -31,7 +30,7 @@ const dbConfig = {
     password: process.env.USER_DB_PASSWORD,
     database: process.env.USER_DB_NAME,
     host: process.env.USER_DB_INSTANCE_URL,
-    port: process.env.USER_DB_PORT,
+    port: Number(process.env.USER_DB_PORT),
     dialect: "postgres",
   },
 };
